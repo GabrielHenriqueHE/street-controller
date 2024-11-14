@@ -8,24 +8,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-import androidx.lifecycle.LiveData;
-import androidx.room.Room;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
-import java.util.Date;
-import java.util.List;
-
 import io.github.gabrielhenriquehe.streetcontroller.adapters.AdapterViewPager;
-import io.github.gabrielhenriquehe.streetcontroller.db.AppDatabase;
-import io.github.gabrielhenriquehe.streetcontroller.entities.Condutor;
-import io.github.gabrielhenriquehe.streetcontroller.services.CondutorService;
 
 public class MainActivity extends AppCompatActivity {
-    
-    CondutorService condutorService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

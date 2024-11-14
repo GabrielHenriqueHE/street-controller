@@ -5,6 +5,7 @@ import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
+import androidx.room.Transaction;
 
 import java.util.List;
 
@@ -28,14 +29,17 @@ public class ViewModelCondutor extends AndroidViewModel {
         return condutores;
     }
 
+    @Transaction
     public void save(Condutor condutor) {
         new Thread(() -> condutorDAO.save(condutor)).start();
     }
 
+    @Transaction
     public void update(Condutor condutor) {
         new Thread(() -> condutorDAO.update(condutor)).start();
     }
 
+    @Transaction
     public void delete(Condutor condutor) {
         new Thread(() -> condutorDAO.delete(condutor)).start();
     }

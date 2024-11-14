@@ -13,12 +13,15 @@ import androidx.sqlite.db.SupportSQLiteOpenHelper;
 
 import io.github.gabrielhenriquehe.streetcontroller.db.converter.Converters;
 import io.github.gabrielhenriquehe.streetcontroller.db.dao.CondutorDAO;
+import io.github.gabrielhenriquehe.streetcontroller.db.dao.VeiculoDAO;
 import io.github.gabrielhenriquehe.streetcontroller.entities.Condutor;
+import io.github.gabrielhenriquehe.streetcontroller.entities.Veiculo;
 
-@Database(entities = {Condutor.class}, version = 1)
+@Database(entities = {Condutor.class, Veiculo.class}, version = 1)
 @TypeConverters(Converters.class)
 public abstract class AppDatabase extends RoomDatabase {
     public abstract CondutorDAO condutorDAO();
+    public abstract VeiculoDAO veiculoDAO();
 
     public static AppDatabase INSTANCE;
 

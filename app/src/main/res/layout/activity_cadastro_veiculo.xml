@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/app_background"
-    tools:context=".activities.ActivityCadastroCondutor">
+    tools:context=".activities.ActivityCadastroVeiculo">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -27,74 +27,90 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingVertical="8dp"
-            android:text="Cadastrar novo condutor"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:text="Cadastrar novo veículo"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             android:textAlignment="center"
             android:textSize="16sp"
             android:textColor="#d2d2d2"
             />
 
+        <RadioGroup
+            android:id="@+id/rdb_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            >
+
+            <RadioButton
+                android:id="@+id/rdb_carro"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#d2d2d2"
+                android:text="Carro" />
+
+            <RadioButton
+                android:id="@+id/rdb_moto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#d2d2d2"
+                android:text="Motocicleta" />
+        </RadioGroup>
+
         <EditText
-            android:id="@+id/txt_cpf"
+            android:id="@+id/txt_placa"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:paddingHorizontal="8dp"
 
-            android:hint="CPF - Ex: 123.456.789-00"
+            android:hint="Placa"
             android:textColorHint="#40FFFFFF"
             android:textSize="18sp"
             />
 
         <EditText
-            android:id="@+id/txt_primeiro_nome"
+            android:id="@+id/txt_marca"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:paddingHorizontal="8dp"
 
-            android:hint="Nome"
+            android:hint="Marca"
             android:textColorHint="#40FFFFFF"
             android:textSize="18sp"
             />
 
         <EditText
-            android:id="@+id/txt_segundo_nome"
+            android:id="@+id/txt_modelo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:paddingHorizontal="8dp"
 
-            android:hint="Sobrenome"
+            android:hint="Modelo"
             android:textColorHint="#40FFFFFF"
             android:textSize="18sp"
             />
 
         <EditText
-            android:id="@+id/date_data_nascimento"
-            android:inputType="date"
+            android:id="@+id/txt_ano"
+            android:inputType="number"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:paddingHorizontal="8dp"
-            android:focusable="false"
-            android:clickable="true"
-            android:hint="Data de nascimento"
+            android:hint="Ano"
             android:textColorHint="#40FFFFFF"
             android:textSize="18sp"
             />
 
         <EditText
-            android:id="@+id/date_vencimento_cnh"
-            android:inputType="date"
+            android:id="@+id/txt_cor"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:paddingHorizontal="8dp"
-            android:focusable="false"
-            android:clickable="true"
-            android:hint="Vencimento CNH"
+            android:hint="Cor"
             android:textColorHint="#40FFFFFF"
             android:textSize="18sp"
             />

@@ -108,6 +108,8 @@ public class ActivityCadastroCondutor extends AppCompatActivity {
             ViewModelCondutor viewModelCondutor = new ViewModelProvider(this).get(ViewModelCondutor.class);
             viewModelCondutor.save(condutor);
             Toast.makeText(v.getContext(), "Condutor registrado com sucesso.", Toast.LENGTH_SHORT).show();
+
+            finish();
         }
 
     }

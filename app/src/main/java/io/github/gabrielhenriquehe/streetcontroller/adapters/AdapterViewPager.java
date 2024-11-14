@@ -6,6 +6,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import io.github.gabrielhenriquehe.streetcontroller.fragments.FragmentListaCondutores;
+import io.github.gabrielhenriquehe.streetcontroller.fragments.FragmentListaVeiculos;
 
 public class AdapterViewPager extends FragmentStateAdapter {
 
@@ -20,7 +21,7 @@ public class AdapterViewPager extends FragmentStateAdapter {
             case 0:
                 return new FragmentListaCondutores();
             default:
-                return new FragmentListaCondutores();
+                return new FragmentListaVeiculos();
         }
     }
 
