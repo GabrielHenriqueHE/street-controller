@@ -18,9 +18,12 @@ import androidx.lifecycle.ViewModelProvider;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import io.github.gabrielhenriquehe.streetcontroller.R;
 import io.github.gabrielhenriquehe.streetcontroller.entities.Condutor;
+import io.github.gabrielhenriquehe.streetcontroller.utils.Validator;
 import io.github.gabrielhenriquehe.streetcontroller.viewmodel.ViewModelCondutor;
 
 public class ActivityCadastroCondutor extends AppCompatActivity {
@@ -86,31 +89,63 @@ public class ActivityCadastroCondutor extends AppCompatActivity {
         String cpf, primeiroNome, segundoNome, dataNascimento, vencimentoCnh;
 
         cpf = txtCpf.getText().toString();
+
         primeiroNome = txtPrimeiroNome.getText().toString();
         segundoNome = txtSegundoNome.getText().toString();
         dataNascimento = dateDataNascimento.getText().toString();
         vencimentoCnh = dateVencimentoCnh.getText().toString();
 
         if (cpf.isEmpty() || primeiroNome.isEmpty() || segundoNome.isEmpty() || dataNascimento.isEmpty() || vencimentoCnh.isEmpty()) {
-            Toast toast = Toast.makeText(v.getContext(), "Preencha todos os campos.", Toast.LENGTH_SHORT);
-            toast.show();
+            Toast.makeText(v.getContext(), "Preencha todos os campos.", Toast.LENGTH_SHORT).show();
+            return;
         } else {
+            
+            if (!Validator.validarCpf(cpf)) {
+                Toast.makeText(this, "CPF inválido.", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            if (!Validator.validarNome(primeiroNome)) {
+                Toast.makeText(this, "Primeiro nome inválido.", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            if (!Validator.validarNome(segundoNome)) {
+                Toast.makeText(this, "Segundo nome inválido.", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+
+            if (!Validator.validarIdade(sdf.parse(dataNascimento))) {
+                Toast.makeText(this, "Data de nascimento inválida.", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            
             Condutor condutor = new Condutor();
             condutor.setCpf(cpf);
             condutor.setPrimeiroNome(primeiroNome);
             condutor.setUltimoNome(segundoNome);
 
-            SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/yyyy");
-
             condutor.setDataNascimento(sdf.parse(dataNascimento));
             condutor.setVencimentoHabilitacao(sdf.parse(vencimentoCnh));
 
             ViewModelCondutor viewModelCondutor = new ViewModelProvider(this).get(ViewModelCondutor.class);
-            viewModelCondutor.save(condutor);
-            Toast.makeText(v.getContext(), "Condutor registrado com sucesso.", Toast.LENGTH_SHORT).show();
 
-            finish();
+            ExecutorService executorService = Executors.newSingleThreadExecutor();
+            executorService.execute(() -> {
+                Condutor condutorExistente = viewModelCondutor.getCondutorByCpfSync(cpf);
+
+                runOnUiThread(() -> {
+                    if (condutorExistente != null) {
+                        Toast.makeText(v.getContext(), "Já existe um condutor registrado usando esse CPF.", Toast.LENGTH_SHORT).show();
+                    } else {
+                        viewModelCondutor.save(condutor);
+                        Toast.makeText(v.getContext(), "Condutor registrado com sucesso.", Toast.LENGTH_SHORT).show();
+                        finish();
+                    }
+                });
+            });
         }
-
     }
 }

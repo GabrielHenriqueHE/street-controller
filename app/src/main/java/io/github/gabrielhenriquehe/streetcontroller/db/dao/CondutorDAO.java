@@ -29,6 +29,9 @@ public interface CondutorDAO {
     @Query("SELECT * FROM TB_condutor WHERE cpf = :cpf")
     LiveData<Condutor> getCondutorByCpf(String cpf);
 
+    @Query("SELECT * FROM TB_condutor WHERE cpf = :cpf")
+    Condutor getCondutorByCpfSync(String cpf);
+
     @Query("SELECT * FROM TB_condutor WHERE id = :condutorId")
     CondutorVeiculo getCondutorVeiculo(long condutorId);
 

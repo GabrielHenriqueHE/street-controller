@@ -222,6 +222,7 @@
                 tools:text="123.456.789-00" />
         </RelativeLayout>
 
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -229,12 +230,43 @@
             android:orientation="vertical">
 
             <Button
+                android:id="@+id/btn_adicionar_condutor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:text="ADICIONAR CONDUTOR"
+
+                android:visibility="gone"
+                />
+
+            <Button
+                android:id="@+id/btn_editar_condutor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:text="EDITAR CONDUTOR"
+
+                android:visibility="gone"
+                />
+
+            <Button
+                android:id="@+id/btn_remover_condutor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:text="REMOVER CONDUTOR"
+
+                android:visibility="gone"
+                />
+
+            <Button
+                android:id="@+id/btn_excluir_veiculo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="20dp"
 
 
-                android:text="EXCLUIR" />
+                android:text="EXCLUIR VEÍCULO" />
         </LinearLayout>
 
     </LinearLayout>

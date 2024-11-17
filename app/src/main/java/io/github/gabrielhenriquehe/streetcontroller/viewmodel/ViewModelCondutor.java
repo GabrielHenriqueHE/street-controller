@@ -39,6 +39,16 @@ public class ViewModelCondutor extends AndroidViewModel {
     }
 
     @Transaction
+    public LiveData<Condutor> getCondutorByCpf(String cpf) {
+        return condutorDAO.getCondutorByCpf(cpf);
+    }
+
+    @Transaction
+    public Condutor getCondutorByCpfSync(String cpf) {
+        return condutorDAO.getCondutorByCpfSync(cpf);
+    }
+
+    @Transaction
     public void save(Condutor condutor) {
         new Thread(() -> condutorDAO.save(condutor)).start();
     }
