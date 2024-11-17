@@ -12,10 +12,12 @@ import java.util.List;
 import io.github.gabrielhenriquehe.streetcontroller.db.AppDatabase;
 import io.github.gabrielhenriquehe.streetcontroller.db.dao.CondutorDAO;
 import io.github.gabrielhenriquehe.streetcontroller.entities.Condutor;
+import io.github.gabrielhenriquehe.streetcontroller.entities.CondutorVeiculo;
 
 public class ViewModelCondutor extends AndroidViewModel {
 
     private final LiveData<List<Condutor>> condutores;
+    private final LiveData<List<CondutorVeiculo>> condutoresComVeiculos;
     private final CondutorDAO condutorDAO;
 
     public ViewModelCondutor(@NonNull Application application) {
@@ -23,10 +25,17 @@ public class ViewModelCondutor extends AndroidViewModel {
         AppDatabase db = AppDatabase.getInstance(application);
         condutorDAO = db.condutorDAO();
         condutores = condutorDAO.getAllCondutores();
+        condutoresComVeiculos = condutorDAO.getAllCondutoresComVeiculo();
     }
 
+    @Transaction
     public LiveData<List<Condutor>> getCondutores() {
         return condutores;
+    }
+
+    @Transaction
+    public LiveData<List<CondutorVeiculo>> getCondutoresComVeiculos() {
+        return condutoresComVeiculos;
     }
 
     @Transaction

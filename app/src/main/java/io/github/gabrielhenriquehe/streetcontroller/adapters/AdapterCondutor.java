@@ -1,6 +1,7 @@
 package io.github.gabrielhenriquehe.streetcontroller.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -11,17 +12,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 import io.github.gabrielhenriquehe.streetcontroller.R;
+import io.github.gabrielhenriquehe.streetcontroller.activities.ActivityDetalheCondutor;
 import io.github.gabrielhenriquehe.streetcontroller.entities.Condutor;
+import io.github.gabrielhenriquehe.streetcontroller.entities.CondutorVeiculo;
 import io.github.gabrielhenriquehe.streetcontroller.viewholder.ViewHolderCondutor;
 
 public class AdapterCondutor extends RecyclerView.Adapter<ViewHolderCondutor> {
 
     public Context context;
-    public List<Condutor> condutores;
+    public List<CondutorVeiculo> condutoresComVeiculo;
 
-    public AdapterCondutor(Context context, List<Condutor> condutores) {
+    public AdapterCondutor(Context context, List<CondutorVeiculo> condutores) {
         this.context = context;
-        this.condutores = (condutores != null) ? condutores : new ArrayList<>();
+        this.condutoresComVeiculo = (condutores != null) ? condutores : new ArrayList<>();
     }
 
     @NonNull
@@ -35,16 +38,26 @@ public class AdapterCondutor extends RecyclerView.Adapter<ViewHolderCondutor> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolderCondutor holder, int position) {
-        holder.nameView.setText(condutores.get(position).getPrimeiroNome().concat(" ").concat(condutores.get(position).getUltimoNome()));
+        CondutorVeiculo condutorVeiculo = condutoresComVeiculo.get(position);
+
+        String nomeCompleto = condutorVeiculo.condutor.getPrimeiroNome().concat(" ").concat(condutorVeiculo.condutor.getUltimoNome());
+
+        holder.nameView.setText(nomeCompleto);
+
+        holder.itemView.setOnClickListener(v -> {
+            Intent intent = new Intent(this.context, ActivityDetalheCondutor.class);
+            intent.putExtra("condutor_data", condutorVeiculo.condutor);
+            this.context.startActivity(intent);
+        });
     }
 
     @Override
     public int getItemCount() {
-        return condutores.size();
+        return condutoresComVeiculo.size();
     }
 
-    public void setCondutores(List<Condutor> condutores) {
-        this.condutores = condutores != null ? condutores : new ArrayList<>();
+    public void setCondutores(List<CondutorVeiculo> condutores) {
+        this.condutoresComVeiculo = condutores != null ? condutores : new ArrayList<>();
         notifyDataSetChanged();
     }
 }

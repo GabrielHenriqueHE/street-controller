@@ -20,6 +20,7 @@ import io.github.gabrielhenriquehe.streetcontroller.R;
 import io.github.gabrielhenriquehe.streetcontroller.activities.ActivityCadastroCondutor;
 import io.github.gabrielhenriquehe.streetcontroller.adapters.AdapterCondutor;
 import io.github.gabrielhenriquehe.streetcontroller.entities.Condutor;
+import io.github.gabrielhenriquehe.streetcontroller.entities.CondutorVeiculo;
 import io.github.gabrielhenriquehe.streetcontroller.viewmodel.ViewModelCondutor;
 
 public class FragmentListaCondutores extends Fragment {
@@ -51,11 +52,11 @@ public class FragmentListaCondutores extends Fragment {
 
         viewModelCondutor = new ViewModelProvider(this).get(ViewModelCondutor.class);
 
-        viewModelCondutor.getCondutores().observe(getViewLifecycleOwner(), condutores -> {
+        viewModelCondutor.getCondutoresComVeiculos().observe(getViewLifecycleOwner(), condutores -> {
             if (condutores != null && !condutores.isEmpty()) {
-                adapterCondutor.setCondutores(condutores); // Atualiza a lista no adapter
+                adapterCondutor.setCondutores(condutores);
             } else {
-                adapterCondutor.setCondutores(new ArrayList<Condutor>()); // Lista vazia como fallback
+                adapterCondutor.setCondutores(new ArrayList<CondutorVeiculo>());
             }
         });
 

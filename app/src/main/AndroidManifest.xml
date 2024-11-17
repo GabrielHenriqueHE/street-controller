@@ -15,7 +15,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.StreetController"
-        tools:targetApi="31">
+        tools:targetApi="21">
+        <activity
+            android:name=".activities.ActivityDetalheCondutor"
+            android:exported="false" />
+        <activity
+            android:name=".activities.ActivityDetalheVeiculo"
+            android:exported="false" />
         <activity
             android:name=".activities.ActivityCadastroVeiculo"
             android:exported="false"

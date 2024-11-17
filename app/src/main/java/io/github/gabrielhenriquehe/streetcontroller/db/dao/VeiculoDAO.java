@@ -6,6 +6,7 @@ import androidx.room.*;
 import java.util.List;
 
 import io.github.gabrielhenriquehe.streetcontroller.entities.Veiculo;
+import io.github.gabrielhenriquehe.streetcontroller.entities.VeiculoCondutor;
 
 @Dao
 public interface VeiculoDAO {
@@ -26,4 +27,10 @@ public interface VeiculoDAO {
 
     @Query("SELECT * FROM TB_veiculo WHERE placa = :placa")
     LiveData<Veiculo> getVeiculoByPlaca(String placa);
+
+    @Query("SELECT * FROM TB_veiculo WHERE condutorId = :condutorId")
+    LiveData<List<VeiculoCondutor>> getVeiculosCondutor(long condutorId);
+
+    @Query("SELECT * FROM TB_veiculo")
+    LiveData<List<VeiculoCondutor>> getAllVeiculosComCondutor();
 }

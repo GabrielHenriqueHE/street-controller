@@ -37,7 +37,7 @@
 
         <RadioGroup
             android:id="@+id/rdb_group"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             >
 
@@ -114,6 +114,15 @@
             android:textColorHint="#40FFFFFF"
             android:textSize="18sp"
             />
+
+        <Spinner
+            android:id="@+id/spinner_condutor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:paddingVertical="8dp"
+
+            app:layout_constraintEnd_toEndOf="parent" />
 
     </LinearLayout>
 

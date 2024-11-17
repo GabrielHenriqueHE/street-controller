@@ -11,20 +11,27 @@ import java.util.List;
 import io.github.gabrielhenriquehe.streetcontroller.db.AppDatabase;
 import io.github.gabrielhenriquehe.streetcontroller.db.dao.VeiculoDAO;
 import io.github.gabrielhenriquehe.streetcontroller.entities.Veiculo;
+import io.github.gabrielhenriquehe.streetcontroller.entities.VeiculoCondutor;
 
 public class ViewModelVeiculo extends AndroidViewModel {
 
-    private final LiveData<List<Veiculo>> veiculos;
+    private final LiveData<List<VeiculoCondutor>> veiculosComCondutor;
     private final VeiculoDAO veiculoDAO;
 
     public ViewModelVeiculo(@NonNull Application application) {
         super(application);
         AppDatabase db = AppDatabase.getInstance(application);
         veiculoDAO = db.veiculoDAO();
-        veiculos = veiculoDAO.getAllVeiculos();
+        veiculosComCondutor = veiculoDAO.getAllVeiculosComCondutor();
     }
 
-    public LiveData<List<Veiculo>> getVeiculos() { return veiculos; };
+    public LiveData<List<VeiculoCondutor>> getVeiculosComCondutor() {
+        return veiculosComCondutor;
+    };
+
+    public LiveData<List<VeiculoCondutor>> getVeiculosByCondutorId(long id) {
+        return veiculoDAO.getVeiculosCondutor(id);
+    }
 
     public void save(Veiculo veiculo) {
         new Thread(() -> {

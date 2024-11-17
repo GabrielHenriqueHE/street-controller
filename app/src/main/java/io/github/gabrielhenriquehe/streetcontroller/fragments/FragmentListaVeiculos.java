@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,7 @@ import java.util.ArrayList;
 import io.github.gabrielhenriquehe.streetcontroller.R;
 import io.github.gabrielhenriquehe.streetcontroller.activities.ActivityCadastroVeiculo;
 import io.github.gabrielhenriquehe.streetcontroller.adapters.AdapterVeiculo;
+import io.github.gabrielhenriquehe.streetcontroller.entities.VeiculoCondutor;
 import io.github.gabrielhenriquehe.streetcontroller.viewmodel.ViewModelVeiculo;
 
 public class FragmentListaVeiculos extends Fragment {
@@ -30,7 +32,7 @@ public class FragmentListaVeiculos extends Fragment {
 
     }
 
-    public static FragmentListaVeiculos newInstance(String param1, String param2) {
+    public static FragmentListaVeiculos newInstance() {
         return new FragmentListaVeiculos();
     }
 
@@ -50,7 +52,7 @@ public class FragmentListaVeiculos extends Fragment {
 
         viewModelVeiculo = new ViewModelProvider(this).get(ViewModelVeiculo.class);
 
-        viewModelVeiculo.getVeiculos().observe(getViewLifecycleOwner(), veiculos -> {
+        viewModelVeiculo.getVeiculosComCondutor().observe(getViewLifecycleOwner(), veiculos -> {
             if (veiculos != null && !veiculos.isEmpty()) {
                 adapterVeiculo.setVeiculos(veiculos);
             } else {

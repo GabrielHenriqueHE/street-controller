@@ -1,6 +1,7 @@
-package io.github.gabrielhenriquehe.streetcontroller;
+package io.github.gabrielhenriquehe.streetcontroller.activities;
 
 import android.os.Bundle;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -13,34 +14,48 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
-import io.github.gabrielhenriquehe.streetcontroller.adapters.AdapterViewPagerMain;
+import io.github.gabrielhenriquehe.streetcontroller.R;
+import io.github.gabrielhenriquehe.streetcontroller.adapters.AdapterViewPagerDetalheCondutor;
+import io.github.gabrielhenriquehe.streetcontroller.entities.Condutor;
 
-public class MainActivity extends AppCompatActivity {
+public class ActivityDetalheCondutor extends AppCompatActivity {
+
+    private TextView txtNomeCondutor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_detalhe_condutor);
 
-        TabLayout tabLayout = findViewById(R.id.tab_layout);
-        ViewPager2 viewPager = findViewById(R.id.view_pager);
+        TabLayout tabLayout = findViewById(R.id.tab_layout_detalhes_condutor);
+        ViewPager2 viewPager = findViewById(R.id.vpg_detalhe_condutor);
 
-        AdapterViewPagerMain adapterViewPagerMain = new AdapterViewPagerMain(this);
-        viewPager.setAdapter(adapterViewPagerMain);
+        Condutor condutor = (Condutor) getIntent().getSerializableExtra("condutor_data");
+
+        AdapterViewPagerDetalheCondutor adapter = new AdapterViewPagerDetalheCondutor(this, condutor);
+        viewPager.setAdapter(adapter);
+
+        txtNomeCondutor = findViewById(R.id.txt_nome_condutor);
+
+        if (condutor != null) {
+            String nomeCondutor = condutor.getPrimeiroNome() + " " + condutor.getUltimoNome();
+            txtNomeCondutor.setText(nomeCondutor);
+        }
+
 
         new TabLayoutMediator(tabLayout, viewPager, new TabLayoutMediator.TabConfigurationStrategy() {
             @Override
             public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
-                switch(position) {
+                switch (position) {
                     case 0:
-                        tab.setText("CONDUTORES");
+                        tab.setText("INFORMAÇÕES");
                         break;
                     case 1:
                         tab.setText("VEÍCULOS");
                         break;
                     default:
-                        tab.setText("Erro interno.");
+                        tab.setText("Erro interno");
                 }
             }
         }).attach();

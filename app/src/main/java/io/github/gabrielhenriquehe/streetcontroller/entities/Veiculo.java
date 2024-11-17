@@ -2,8 +2,20 @@ package io.github.gabrielhenriquehe.streetcontroller.entities;
 
 import androidx.room.*;
 
-@Entity(tableName = "TB_veiculo")
-public class Veiculo {
+import java.io.Serial;
+import java.io.Serializable;
+
+@Entity(tableName = "TB_veiculo",
+        foreignKeys = @ForeignKey(
+                entity = Condutor.class,
+                parentColumns = "id",
+                childColumns = "condutorId",
+                onDelete = ForeignKey.SET_DEFAULT
+        ))
+public class Veiculo implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 1L;
 
     @PrimaryKey(autoGenerate = true)
     private long id;
@@ -13,7 +25,9 @@ public class Veiculo {
     private String modelo;
     private int ano;
     private String cor;
-    private long condutorId;
+
+    @ColumnInfo(name = "condutorId", defaultValue = "NULL")
+    private Long condutorId;
 
     public Veiculo() {}
 
@@ -74,19 +88,19 @@ public class Veiculo {
         this.ano = ano;
     }
 
-    public long getCondutorId() {
-        return condutorId;
-    }
-
-    public void setCondutorId(long condutorId) {
-        this.condutorId = condutorId;
-    }
-
     public String getCor() {
         return cor;
     }
 
     public void setCor(String cor) {
         this.cor = cor;
+    }
+
+    public Long getCondutorId() {
+        return condutorId;
+    }
+
+    public void setCondutorId(Long condutorId) {
+        this.condutorId = condutorId;
     }
 }

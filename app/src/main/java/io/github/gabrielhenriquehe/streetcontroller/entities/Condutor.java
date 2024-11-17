@@ -4,10 +4,15 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.Date;
 
 @Entity(tableName = "TB_condutor")
-public class Condutor {
+public class Condutor implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 1L;
 
     @PrimaryKey(autoGenerate = true)
     private long id;
@@ -88,13 +93,6 @@ public class Condutor {
 
     @Override
     public String toString() {
-        return "Condutor{" +
-                "id=" + id +
-                ", cpf='" + cpf + '\'' +
-                ", primeiroNome='" + primeiroNome + '\'' +
-                ", ultimoNome='" + ultimoNome + '\'' +
-                ", dataNascimento=" + dataNascimento +
-                ", vencimentoHabilitacao=" + vencimentoHabilitacao +
-                '}';
+        return this.primeiroNome + " " + this.ultimoNome + " (" + this.cpf + ")";
     }
 }
