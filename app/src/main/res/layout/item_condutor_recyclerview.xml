@@ -2,22 +2,58 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:background="@drawable/app_background"
+    >
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:paddingVertical="32dp"
+        android:paddingHorizontal="16dp"
+        >
+        
+        <ImageView
+            android:id="@+id/icon_person"
+
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+
+            android:layout_marginEnd="16dp"
+
+            android:src="@drawable/ic_person"
+            />
 
         <TextView
-            android:id="@+id/condutor_nome"
+            android:id="@+id/item_txt_nome_condutor"
+            style="@style/text_view_subtitle"
+            android:textAlignment="textStart"
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingVertical="12.5dp"
-            android:paddingHorizontal="16dp"
-            android:gravity="center_vertical"
-            android:textSize="20sp"
-            android:background="@drawable/background_item"
-            android:textColor="@color/white"
+
+            android:layout_toEndOf="@id/icon_person"
+
+            tools:text="Gabriel Henrique"
             />
+
+        <TextView
+            android:id="@+id/item_txt_cpf"
+            style="@style/text_view_content"
+            android:textSize="14sp"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_toEndOf="@id/icon_person"
+            android:layout_below="@id/item_txt_nome_condutor"
+
+            tools:text="158.731.446-05"
+            />
+
     </RelativeLayout>
 </LinearLayout>

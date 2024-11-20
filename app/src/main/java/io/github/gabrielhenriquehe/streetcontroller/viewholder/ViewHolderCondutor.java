@@ -10,10 +10,11 @@ import io.github.gabrielhenriquehe.streetcontroller.R;
 
 public class ViewHolderCondutor extends RecyclerView.ViewHolder {
 
-    public TextView nameView;
+    public TextView txtName, txtCpf;
 
     public ViewHolderCondutor(@NonNull View itemView) {
         super(itemView);
-        this.nameView = itemView.findViewById(R.id.condutor_nome);
+        this.txtName = itemView.findViewById(R.id.item_txt_nome_condutor);
+        this.txtCpf = itemView.findViewById(R.id.item_txt_cpf);
     }
 }

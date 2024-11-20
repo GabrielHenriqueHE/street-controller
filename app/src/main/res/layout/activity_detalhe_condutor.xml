@@ -6,17 +6,51 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@drawable/app_background"
     tools:context=".activities.ActivityDetalheCondutor" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_marginVertical="16dp"
+
+        android:paddingHorizontal="16dp"
+        >
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_back"
+            style="@style/back_button"
+
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            />
+
+        <TextView
+            style="@style/text_view_content"
+            android:textSize="20sp"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_toEndOf="@id/btn_back"
+            android:layout_centerInParent="true"
+
+            android:layout_marginStart="8dp"
+
+            android:text="Voltar"
+            />
+    </RelativeLayout>
 
     <TextView
         android:id="@+id/txt_nome_condutor"
+        style="@style/text_view_title"
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+
         android:paddingVertical="8dp"
 
-        android:textSize="24sp"
-        android:textAlignment="center"
-        android:textStyle="bold"
         tools:text="Gabriel Henrique"
         />
 
@@ -29,7 +63,11 @@
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tab_layout_detalhes_condutor"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@drawable/app_background"
+        app:tabTextColor="@color/black"
+        app:tabSelectedTextColor="@color/black"
+        >
 
         <com.google.android.material.tabs.TabItem
             android:id="@+id/tab_informacoes_condutores"

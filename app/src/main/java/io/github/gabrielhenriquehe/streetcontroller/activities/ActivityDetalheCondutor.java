@@ -1,6 +1,7 @@
 package io.github.gabrielhenriquehe.streetcontroller.activities;
 
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -21,6 +22,7 @@ import io.github.gabrielhenriquehe.streetcontroller.entities.Condutor;
 public class ActivityDetalheCondutor extends AppCompatActivity {
 
     private TextView txtNomeCondutor;
+    private Button btnBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +39,11 @@ public class ActivityDetalheCondutor extends AppCompatActivity {
         viewPager.setAdapter(adapter);
 
         txtNomeCondutor = findViewById(R.id.txt_nome_condutor);
+        btnBack = findViewById(R.id.btn_back);
+
+        btnBack.setOnClickListener(v -> {
+            this.finish();
+        });
 
         if (condutor != null) {
             String nomeCondutor = condutor.getPrimeiroNome() + " " + condutor.getUltimoNome();

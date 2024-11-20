@@ -4,36 +4,45 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingTop="24dp"
-    tools:context=".fragments.FragmentDetalheCondutor">
+    tools:context=".fragments.FragmentDetalheCondutor"
+    android:background="@drawable/app_background"
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:paddingTop="16dp"
         android:orientation="vertical">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingHorizontal="24dp">
+            android:paddingHorizontal="16dp">
 
             <TextView
                 android:id="@+id/labelFor_nome"
+                style="@style/text_view_label"
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                android:textSize="18sp"
-                android:textStyle="bold"
+
                 android:text="Nome: " />
 
             <TextView
                 android:id="@+id/txt_nome"
+                style="@style/text_view_content"
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
+
                 android:layout_toEndOf="@id/labelFor_nome"
-                android:textSize="18sp"
+
                 tools:text="Gabriel Henrique" />
         </RelativeLayout>
 
@@ -41,26 +50,32 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:paddingHorizontal="24dp">
+            android:paddingHorizontal="16dp">
 
             <TextView
                 android:id="@+id/labelFor_cpf"
+                style="@style/text_view_label"
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                android:textSize="18sp"
-                android:textStyle="bold"
+
                 android:text="CPF: " />
 
             <TextView
                 android:id="@+id/txt_cpf"
+                style="@style/text_view_content"
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
+
                 android:layout_toEndOf="@id/labelFor_cpf"
-                android:textSize="18sp"
+
                 tools:text="123.456.789-00"/>
         </RelativeLayout>
 
@@ -68,26 +83,32 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:paddingHorizontal="24dp">
+            android:paddingHorizontal="16dp">
 
             <TextView
                 android:id="@+id/labelFor_data_nascimento"
+                style="@style/text_view_label"
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                android:textSize="18sp"
-                android:textStyle="bold"
+
                 android:text="Data de nascimento: " />
 
             <TextView
                 android:id="@+id/txt_data_nascimento"
+                style="@style/text_view_content"
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
+
                 android:layout_toEndOf="@id/labelFor_data_nascimento"
-                android:textSize="18sp"
+
                 tools:text="01/04/2004" />
         </RelativeLayout>
 
@@ -95,41 +116,48 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:paddingHorizontal="24dp">
+            android:paddingHorizontal="16dp">
 
             <TextView
                 android:id="@+id/labelFor_vencimento_cnh"
+                style="@style/text_view_label"
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                android:textSize="18sp"
-                android:textStyle="bold"
+
                 android:text="Vencimento CNH: " />
 
             <TextView
                 android:id="@+id/txt_vencimento_cnh"
+                style="@style/text_view_content"
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
+
                 android:layout_toEndOf="@id/labelFor_vencimento_cnh"
-                android:textSize="18sp"
+
                 tools:text="30/06/2025" />
         </RelativeLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:paddingHorizontal="16dp"
             android:gravity="bottom"
             android:orientation="vertical">
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_excluir_condutor"
+                style="@style/action_button"
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="20dp"
-
 
                 android:text="EXCLUIR" />
         </LinearLayout>

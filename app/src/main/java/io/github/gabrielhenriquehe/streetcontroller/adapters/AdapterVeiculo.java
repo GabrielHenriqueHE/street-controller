@@ -40,7 +40,7 @@ public class AdapterVeiculo extends RecyclerView.Adapter<ViewHolderVeiculo> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolderVeiculo holder, int position) {
-        String marca, modelo, cor;
+        String marca, modelo, placa, tipo;
         int ano;
 
         Veiculo veiculo = veiculoComCondutor.get(position).veiculo;
@@ -48,11 +48,20 @@ public class AdapterVeiculo extends RecyclerView.Adapter<ViewHolderVeiculo> {
 
         marca = veiculo.getMarca();
         modelo = veiculo.getModelo();
-        cor = veiculo.getCor();
         ano = veiculo.getAno();
-        String info = marca + " " + modelo + " " + ano + " | " + cor;
+        placa = veiculo.getPlaca();
+        tipo = veiculo.getTipo();
 
-        holder.veiculoInfoView.setText(info);
+        holder.txtModelo.setText(modelo);
+        holder.txtMarca.setText(marca);
+        holder.txtAno.setText(String.valueOf(ano));
+        holder.txtPlaca.setText(placa);
+
+        if (tipo.equalsIgnoreCase("CARRO")) {
+            holder.vehicleIcon.setImageResource(R.drawable.ic_car);
+        } else {
+            holder.vehicleIcon.setImageResource(R.drawable.ic_helmet);
+        }
 
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(v.getContext(), ActivityDetalheVeiculo.class);

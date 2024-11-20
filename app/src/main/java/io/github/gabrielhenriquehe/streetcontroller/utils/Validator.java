@@ -79,4 +79,13 @@ public class Validator {
 
         return idade >= IDADE_MINIMA;
     }
+
+    public static boolean validarPlaca(String placa) {
+        String regexAntiga = "^[A-Z]{3}-\\d{4}$";
+        String regexNova = "^[A-Z]{3}\\d[A-Z]\\d{2}$";
+
+        placa = placa.toUpperCase();
+
+        return placa.matches(regexAntiga) || placa.matches(regexNova);
+    }
 }

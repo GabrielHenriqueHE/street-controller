@@ -2,6 +2,10 @@ package io.github.gabrielhenriquehe.streetcontroller.activities;
 
 import android.app.DatePickerDialog;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.InputFilter;
+import android.text.TextWatcher;
+import android.text.method.DigitsKeyListener;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -29,7 +33,7 @@ import io.github.gabrielhenriquehe.streetcontroller.viewmodel.ViewModelCondutor;
 public class ActivityCadastroCondutor extends AppCompatActivity {
 
     private EditText txtCpf,txtPrimeiroNome, txtSegundoNome, dateDataNascimento, dateVencimentoCnh;
-    private Button btnCadastrar;
+    private Button btnCadastrar, btnBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,14 +47,10 @@ public class ActivityCadastroCondutor extends AppCompatActivity {
         dateDataNascimento = findViewById(R.id.date_data_nascimento);
         dateVencimentoCnh = findViewById(R.id.date_vencimento_cnh);
         btnCadastrar = findViewById(R.id.btn_finalizar_cadastro);
+        btnBack = findViewById(R.id.btn_back);
 
-        dateDataNascimento.setOnClickListener(v -> {
-            this.showDatePickerDialog(v, dateDataNascimento);
-        });
-
-        dateVencimentoCnh.setOnClickListener(v -> {
-            this.showDatePickerDialog(v, dateVencimentoCnh);
-        });
+        this.setupDateEditText();
+        this.setupCpfEditText();
 
         btnCadastrar.setOnClickListener(v -> {
             try {
@@ -60,29 +60,15 @@ public class ActivityCadastroCondutor extends AppCompatActivity {
             }
         });
 
+        btnBack.setOnClickListener(v -> {
+            this.finish();
+        });
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-    }
-
-    private void showDatePickerDialog(View v, EditText edt) {
-        final Calendar calendar = Calendar.getInstance();
-        int year = calendar.get(Calendar.YEAR);
-        int month = calendar.get(Calendar.MONTH);
-        int day = calendar.get(Calendar.DAY_OF_MONTH);
-
-        DatePickerDialog datePickerDialog = new DatePickerDialog(
-                v.getContext(),
-                (view, selectedYear, selectedMonth, selectedDayOfMonth) -> {
-                    String dataEscolhida = String.format("%02d/%02d/%04d", selectedDayOfMonth, selectedMonth + 1, selectedYear);
-                    edt.setText(dataEscolhida);
-                },
-                year, month, day
-        );
-
-        datePickerDialog.show();
     }
 
     private void processRegister(View v) throws ParseException {
@@ -148,4 +134,64 @@ public class ActivityCadastroCondutor extends AppCompatActivity {
             });
         }
     }
+
+    private void setupDateEditText() {
+        dateDataNascimento.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int start, int before, int after) {
+                String text = charSequence.toString();
+                if (text.length() == 2 || text.length() == 5) {
+                    text = text + "/";
+                    dateDataNascimento.setText(text);
+                    dateDataNascimento.setSelection(text.length());
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                // Impede que o usuário insira mais de 10 caracteres, como no formato dd/MM/yyyy
+                if (editable.length() > 10) {
+                    editable.delete(10, editable.length());
+                }
+            }
+        });
+
+        dateVencimentoCnh.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int start, int before, int after) {
+                String text = charSequence.toString();
+                if (text.length() == 2 || text.length() == 5) {
+                    text = text + "/";
+                    dateVencimentoCnh.setText(text);
+                    dateVencimentoCnh.setSelection(text.length());
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if (editable.length() > 10) {
+                    editable.delete(10, editable.length());
+                }
+            }
+        });
+
+        dateDataNascimento.setKeyListener(DigitsKeyListener.getInstance("0123456789/"));
+        dateVencimentoCnh.setKeyListener(DigitsKeyListener.getInstance("0123456789/"));
+    }
+
+    private void setupCpfEditText() {
+        txtCpf.setFilters(new InputFilter[] {new InputFilter.LengthFilter(11)});
+        txtCpf.setKeyListener(DigitsKeyListener.getInstance("0123456789"));
+    }
+
 }

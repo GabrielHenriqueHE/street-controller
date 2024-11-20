@@ -41,8 +41,10 @@ public class AdapterCondutor extends RecyclerView.Adapter<ViewHolderCondutor> {
         CondutorVeiculo condutorVeiculo = condutoresComVeiculo.get(position);
 
         String nomeCompleto = condutorVeiculo.condutor.getPrimeiroNome().concat(" ").concat(condutorVeiculo.condutor.getUltimoNome());
+        String cpfFormatado = this.formatarCpf(condutorVeiculo.condutor.getCpf());
 
-        holder.nameView.setText(nomeCompleto);
+        holder.txtName.setText(nomeCompleto);
+        holder.txtCpf.setText(cpfFormatado);
 
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(this.context, ActivityDetalheCondutor.class);
@@ -59,5 +61,13 @@ public class AdapterCondutor extends RecyclerView.Adapter<ViewHolderCondutor> {
     public void setCondutores(List<CondutorVeiculo> condutores) {
         this.condutoresComVeiculo = condutores != null ? condutores : new ArrayList<>();
         notifyDataSetChanged();
+    }
+
+    private String formatarCpf(String cpf) {
+        if (cpf.length() == 11) {
+            return cpf.replaceFirst("(\\d{3})(\\d{3})(\\d{3})(\\d{2})", "$1.$2.$3-$4");
+        }
+
+        return cpf;
     }
 }

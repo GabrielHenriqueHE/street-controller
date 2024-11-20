@@ -4,6 +4,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/app_background"
     tools:context=".MainActivity">
 
     <!-- ViewPager2 deve vir primeiro -->
@@ -18,6 +19,9 @@
         android:id="@+id/tab_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/app_background"
+        app:tabTextColor="@color/black"
+        app:tabSelectedTextColor="@color/black"
         android:layout_alignParentBottom="true">
 
         <com.google.android.material.tabs.TabItem

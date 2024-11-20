@@ -66,7 +66,10 @@ public class FragmentDetalheCondutor extends Fragment {
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
             txtNome.setText(nome);
-            txtCpf.setText(condutor.getCpf());
+
+            String cpfFormatado = this.formatarCpf(condutor.getCpf());
+            txtCpf.setText(cpfFormatado);
+
             txtDataNascimento.setText(sdf.format(condutor.getDataNascimento()));
             txtVencimentoCNH.setText(sdf.format(condutor.getVencimentoHabilitacao()));
 
@@ -96,5 +99,13 @@ public class FragmentDetalheCondutor extends Fragment {
                         }).show();
             }
         });
+    }
+
+    private String formatarCpf(String cpf) {
+        if (cpf.length() == 11) {
+            return cpf.replaceFirst("(\\d{3})(\\d{3})(\\d{3})(\\d{2})", "$1.$2.$3-$4");
+        }
+
+        return cpf;
     }
 }

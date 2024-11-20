@@ -3,15 +3,21 @@
     android:orientation="vertical"
     android:padding="16dp"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="@drawable/app_background"
+    >
 
     <TextView
+        style="@style/text_view_title"
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+
+        android:paddingVertical="8dp"
+
+        android:textAlignment="textStart"
         android:text="Selecionar condutor"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:paddingVertical="8dp" />
+        />
 
     <Spinner
         android:id="@+id/spinner_condutores"
@@ -21,9 +27,12 @@
         android:paddingVertical="8dp"
         />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_confirmar_operacao"
+        style="@style/action_button"
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+
         android:text="CONFIRMAR" />
 </LinearLayout>

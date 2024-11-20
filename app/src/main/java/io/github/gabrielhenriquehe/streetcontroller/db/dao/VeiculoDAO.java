@@ -26,7 +26,7 @@ public interface VeiculoDAO {
     Veiculo getVeiculoById(long id);
 
     @Query("SELECT * FROM TB_veiculo WHERE placa = :placa")
-    LiveData<Veiculo> getVeiculoByPlaca(String placa);
+    Veiculo getVeiculoByPlaca(String placa);
 
     @Query("SELECT * FROM TB_veiculo WHERE condutorId = :condutorId")
     LiveData<List<VeiculoCondutor>> getVeiculosCondutor(long condutorId);

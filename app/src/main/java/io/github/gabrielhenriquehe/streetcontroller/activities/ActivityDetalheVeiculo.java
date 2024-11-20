@@ -25,7 +25,7 @@ import io.github.gabrielhenriquehe.streetcontroller.viewmodel.ViewModelVeiculo;
 public class ActivityDetalheVeiculo extends AppCompatActivity {
 
     TextView txtDescricaoVeiculo, txtTipoVeiculo, txtMarca, txtModelo, txtAno, txtCor, txtPlaca, txtCondutor, txtDocumentoCondutor;
-    Button btnAdicionarCondutor, btnEditarCondutor, btnRemoverCondutor, btnExcluirVeiculo;
+    Button btnAdicionarCondutor, btnEditarCondutor, btnRemoverCondutor, btnExcluirVeiculo, btnBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +47,11 @@ public class ActivityDetalheVeiculo extends AppCompatActivity {
         btnEditarCondutor = findViewById(R.id.btn_editar_condutor);
         btnRemoverCondutor = findViewById(R.id.btn_remover_condutor);
         btnExcluirVeiculo = findViewById(R.id.btn_excluir_veiculo);
+        btnBack = findViewById(R.id.btn_back);
+
+        btnBack.setOnClickListener(v -> {
+            this.finish();
+        });
 
         Veiculo veiculo = (Veiculo) getIntent().getSerializableExtra("veiculo_data");
 
@@ -77,13 +82,16 @@ public class ActivityDetalheVeiculo extends AppCompatActivity {
             txtDocumentoCondutor.setText("--");
 
             btnAdicionarCondutor.setVisibility(View.VISIBLE);
+            btnExcluirVeiculo.setVisibility(View.VISIBLE);
         } else {
             String condutorNome = condutor.getPrimeiroNome() + " " + condutor.getUltimoNome();
             txtCondutor.setText(condutorNome);
-            txtDocumentoCondutor.setText(condutor.getCpf());
+            txtDocumentoCondutor.setText(this.formatarCpf(condutor.getCpf()));
 
             btnEditarCondutor.setVisibility(View.VISIBLE);
             btnRemoverCondutor.setVisibility(View.VISIBLE);
+
+            btnExcluirVeiculo.setVisibility(View.GONE);
         }
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
@@ -126,9 +134,10 @@ public class ActivityDetalheVeiculo extends AppCompatActivity {
                             String nome = condutorSelecionado.getPrimeiroNome() + " " + condutorSelecionado.getUltimoNome();
 
                             txtCondutor.setText(nome);
-                            txtDocumentoCondutor.setText(condutorSelecionado.getCpf());
+                            txtDocumentoCondutor.setText(this.formatarCpf(condutorSelecionado.getCpf()));
 
                             btnAdicionarCondutor.setVisibility(View.GONE);
+                            btnExcluirVeiculo.setVisibility(View.GONE);
                             btnEditarCondutor.setVisibility(View.VISIBLE);
                             btnRemoverCondutor.setVisibility(View.VISIBLE);
                         }).setNegativeButton("Não", (dialog2, which) -> {
@@ -156,6 +165,7 @@ public class ActivityDetalheVeiculo extends AppCompatActivity {
                     txtDocumentoCondutor.setText("--");
 
                     btnAdicionarCondutor.setVisibility(View.VISIBLE);
+                    btnExcluirVeiculo.setVisibility(View.VISIBLE);
                     btnEditarCondutor.setVisibility(View.GONE);
                     btnRemoverCondutor.setVisibility(View.GONE);
                 }).setNegativeButton("Não", (dialog, which) -> {
@@ -180,5 +190,13 @@ public class ActivityDetalheVeiculo extends AppCompatActivity {
                         dialog.dismiss();
                     }).show();
         }
+    }
+
+    private String formatarCpf(String cpf) {
+        if (cpf.length() == 11) {
+            return cpf.replaceFirst("(\\d{3})(\\d{3})(\\d{3})(\\d{2})", "$1.$2.$3-$4");
+        }
+
+        return cpf;
     }
 }

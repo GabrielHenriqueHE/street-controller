@@ -50,4 +50,8 @@ public class ViewModelVeiculo extends AndroidViewModel {
             veiculoDAO.delete(veiculo);
         }).start();
     }
+
+    public Veiculo getVeiculoByPlacaSync(String placa) {
+        return veiculoDAO.getVeiculoByPlaca(placa);
+    }
 }
