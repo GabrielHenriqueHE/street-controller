@@ -92,6 +92,7 @@ public class ActivityDetalheVeiculo extends AppCompatActivity {
             btnRemoverCondutor.setVisibility(View.VISIBLE);
 
             btnExcluirVeiculo.setVisibility(View.GONE);
+            btnAdicionarCondutor.setVisibility(View.GONE);
         }
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {

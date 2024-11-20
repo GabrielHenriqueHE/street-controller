@@ -93,6 +93,14 @@ public class Condutor implements Serializable {
 
     @Override
     public String toString() {
-        return this.primeiroNome + " " + this.ultimoNome + " (" + this.cpf + ")";
+        return this.primeiroNome + " " + this.ultimoNome + " (" + this.formatarCpf(this.cpf) + ")";
+    }
+
+    private String formatarCpf(String cpf) {
+        if (cpf.length() == 11) {
+            return cpf.replaceFirst("(\\d{3})(\\d{3})(\\d{3})(\\d{2})", "$1.$2.$3-$4");
+        }
+
+        return cpf;
     }
 }
