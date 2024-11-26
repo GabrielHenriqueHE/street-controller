@@ -113,6 +113,9 @@ public class ActivityCadastroCondutor extends AppCompatActivity {
             condutor.setPrimeiroNome(primeiroNome);
             condutor.setUltimoNome(segundoNome);
 
+            dataNascimento = normalizeDate(dataNascimento);
+            vencimentoCnh = normalizeDate(vencimentoCnh);
+
             condutor.setDataNascimento(sdf.parse(dataNascimento));
             condutor.setVencimentoHabilitacao(sdf.parse(vencimentoCnh));
 
@@ -192,6 +195,29 @@ public class ActivityCadastroCondutor extends AppCompatActivity {
     private void setupCpfEditText() {
         txtCpf.setFilters(new InputFilter[] {new InputFilter.LengthFilter(11)});
         txtCpf.setKeyListener(DigitsKeyListener.getInstance("0123456789"));
+    }
+
+    private String normalizeDate(String inputData) throws ParseException {
+        if (inputData == null || inputData.isEmpty()) {
+            throw new ParseException("Data inválida", 0);
+        }
+
+        SimpleDateFormat shortFormat = new SimpleDateFormat("dd/MM/yy");
+        SimpleDateFormat longFormat = new SimpleDateFormat("dd/MM/yyyy");
+
+        // Tenta interpretar a data de entrada no formato curto (yy)
+        if (inputData.length() == 8) {
+            int year = Integer.parseInt(inputData.substring(6));
+            if (year >= 70 && year <= 99) {
+                year += 1900; // Assume como 19XX
+            } else {
+                year += 2000; // Assume como 20XX
+            }
+            inputData = inputData.substring(0, 6) + year;
+        }
+
+        // Retorna a data normalizada no formato dd/MM/yyyy
+        return inputData.length() == 10 ? inputData : longFormat.format(shortFormat.parse(inputData));
     }
 
 }

@@ -89,7 +89,7 @@
         <EditText
             android:id="@+id/date_data_nascimento"
             style="@style/edit_text"
-            android:hint="Data de nascimento"
+            android:hint="Data de nascimento (dd/mm/aaaa)"
 
             android:layout_marginVertical="4dp"
 
@@ -98,7 +98,7 @@
         <EditText
             android:id="@+id/date_vencimento_cnh"
             style="@style/edit_text"
-            android:hint="Vencimento CNH"
+            android:hint="Vencimento CNH (dd/mm/aaaa)"
 
             android:layout_marginVertical="4dp"
 

@@ -52,8 +52,6 @@ public class FragmentDetalheCondutor extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_detalhe_condutor, container, false);
 
-        Log.d("TEST", condutor.getPrimeiroNome());
-
         txtNome = view.findViewById(R.id.txt_nome);
         txtCpf = view.findViewById(R.id.txt_cpf);
         txtDataNascimento = view.findViewById(R.id.txt_data_nascimento);
